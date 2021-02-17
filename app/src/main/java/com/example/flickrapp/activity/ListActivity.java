@@ -38,18 +38,17 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
         ListView list = findViewById(R.id.list);
 
-        Log.i("TEST", "Création de l'adaptateur");
-
+        //Creation de notre adapteur qui va être bind avec notre liste
+        Log.i("ADAPTER", "Création de l'adaptateur");
         adapter = new MyAdapter(this);
         list.setAdapter(adapter);
 
-        Log.i("TEST", "Created");
+        Log.i("ADAPTER", "Created");
 
-        final Location[] loc = {null};
         AsyncTask<String, Void , JSONObject> asyncTask = new AsyncFlickrJSONDataForList(adapter);
 
-
-
+        // Final part with Géolocalisation and permission
+        final Location[] loc = {null};
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // If not granted => Ask for permission
@@ -60,7 +59,9 @@ public class ListActivity extends AppCompatActivity {
         }else{
             Log.i("perm", "Permission already Granted");
         }
-        /*
+        /* Trying somthing for location
+
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -96,16 +97,19 @@ public class ListActivity extends AppCompatActivity {
         LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, mLocationCallback, null);
 */
 
+
+        // If location is found => We start our AsyncTask for the custom URL in order to display images around this location
         LocationServices.getFusedLocationProviderClient(this).getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
                 Log.i("loc", "Location found 2 : " + location);
                 loc[0] = location;
-                String url = new String("https://api.flickr.com/services/rest/?" +
+                /*String url = new String("https://api.flickr.com/services/rest/?" +
                         "method=flickr.photos.search" +
                         "&api_key=3de74449966b84b74511d2831fe52e2f" +
                         "&has_geo=1&lat=" + 48.973005 +
-                        "&lon=" + 2.306742 + "&format=json");
+                        "&lon=" + 2.306742 + "&format=json");*/
+                String url = new String("https://www.flickr.com/services/feeds/photos_public.gne?tags=trees&format=json");
                 Log.i("url", url);
                 Log.i("loc", "Latitude : " + loc[0].getLatitude() + ", Longidtude :" + loc[0].getLongitude());
                 asyncTask.execute(url);

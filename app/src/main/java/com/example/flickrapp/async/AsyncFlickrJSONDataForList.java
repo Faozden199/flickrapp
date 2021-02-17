@@ -18,8 +18,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class AsyncFlickrJSONDataForList extends AsyncTask<String , Void , JSONObject> {
-    private final MyAdapter adapter;
 
+    // This adapter will be link with our list before the task execute
+    private final MyAdapter adapter;
     public AsyncFlickrJSONDataForList(MyAdapter adapter) {
         this.adapter =adapter;
     }
@@ -54,7 +55,9 @@ public class AsyncFlickrJSONDataForList extends AsyncTask<String , Void , JSONOb
             for (int i = 0; i<items.length(); i++)
             {
                 Log.i("Notify", i + " : notify changed");
+                //We add the object in the Adapter Vector
                 adapter.add(items.getJSONObject(i).getJSONObject("media").getString("m"));
+                // We update the ListView
                 adapter.notifyDataSetChanged();
                 //AsyncBitmapDownloader abd = new AsyncBitmapDownloader();
                 //abd.execute(urlmedia);

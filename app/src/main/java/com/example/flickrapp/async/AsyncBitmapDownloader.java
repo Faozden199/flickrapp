@@ -1,5 +1,4 @@
 package com.example.flickrapp.async;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;

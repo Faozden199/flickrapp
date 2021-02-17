@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 public class GetImageOnClickListener implements View.OnClickListener {
 
-    private AppCompatActivity myActivity;
+    private final AppCompatActivity myActivity;
 
     public GetImageOnClickListener(AppCompatActivity mainActivity) {
         myActivity = mainActivity;

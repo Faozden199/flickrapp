@@ -1,5 +1,6 @@
 package com.example.flickrapp.async;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -24,8 +25,8 @@ import java.util.ArrayList;
 
 public class AsyncFlickrJSONData extends AsyncTask<String , Void , JSONObject> {
 
-    private AppCompatActivity myActivity;
-
+    // We store our main activity to retrieve View information
+    private final AppCompatActivity myActivity;
     public AsyncFlickrJSONData(AppCompatActivity mainActivity) {
         myActivity = mainActivity;
     }
@@ -55,11 +56,13 @@ public class AsyncFlickrJSONData extends AsyncTask<String , Void , JSONObject> {
     protected void onPostExecute(JSONObject jsonObject) {
         Log.i("JFL", "OnPostExecute");
         Log.i("JFL", jsonObject.toString());
+
+        // I used a default ArrayAdapter to display the list of our image url
         ListView list = (ListView)myActivity.findViewById(R.id.list);
         ArrayList<String> arrayList = new ArrayList<String>();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(myActivity.getApplicationContext(), android.R.layout.simple_spinner_item, arrayList);
 
-        // Here, you set the data in your ListView
+        // I set the data in my ListView
         list.setAdapter(adapter);
 
         try {
@@ -69,10 +72,13 @@ public class AsyncFlickrJSONData extends AsyncTask<String , Void , JSONObject> {
                 JSONObject flickr_entry = items.getJSONObject(i);
                 String urlmedia = flickr_entry.getJSONObject("media").getString("m");
                 Log.i("JFL", "URL media: " + urlmedia);
-                // Downloading image
-                AsyncBitmapDownloader abd = new AsyncBitmapDownloader();
+
+                // For each image added in our array list we notify the adapter
                 arrayList.add(urlmedia);
                 adapter.notifyDataSetChanged();
+
+                // Downloading image ( to see how the mechanics work but not used here )
+                AsyncBitmapDownloader abd = new AsyncBitmapDownloader();
                 abd.execute(urlmedia);
             }
 
@@ -93,6 +99,7 @@ public class AsyncFlickrJSONData extends AsyncTask<String , Void , JSONObject> {
             // Extracting the JSON object from the String
             StringBuilder sb = new StringBuilder();
             sb.append(bo.toString());
+            // We clean the result of the ByteArray to remove useless Flickr information
             String jsonextracted = sb.substring("jsonFlickrFeed(".length(), sb.length() - 1);
             return new JSONObject(jsonextracted);
         } catch (IOException | JSONException e) {
