@@ -44,7 +44,6 @@ public class ListActivity extends AppCompatActivity {
         list.setAdapter(adapter);
 
         Log.i("ADAPTER", "Created");
-
         AsyncTask<String, Void , JSONObject> asyncTask = new AsyncFlickrJSONDataForList(adapter);
 
         // Final part with Géolocalisation and permission

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -76,10 +77,11 @@ public class AsyncFlickrJSONData extends AsyncTask<String , Void , JSONObject> {
                 // For each image added in our array list we notify the adapter
                 arrayList.add(urlmedia);
                 adapter.notifyDataSetChanged();
-
-                // Downloading image ( to see how the mechanics work but not used here )
-                AsyncBitmapDownloader abd = new AsyncBitmapDownloader();
-                abd.execute(urlmedia);
+                if(i == 0){
+                    // Downloading image ( to see how the mechanics work but not used here )
+                    AsyncBitmapDownloader abd = new AsyncBitmapDownloader(myActivity);
+                    abd.execute(urlmedia);
+                }
             }
 
         } catch (JSONException e) {

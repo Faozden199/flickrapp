@@ -1,4 +1,4 @@
-package com.example.flickrapp.async;
+ package com.example.flickrapp.async;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -59,8 +59,6 @@ public class AsyncFlickrJSONDataForList extends AsyncTask<String , Void , JSONOb
                 adapter.add(items.getJSONObject(i).getJSONObject("media").getString("m"));
                 // We update the ListView
                 adapter.notifyDataSetChanged();
-                //AsyncBitmapDownloader abd = new AsyncBitmapDownloader();
-                //abd.execute(urlmedia);
             }
         } catch (JSONException e) {
             e.printStackTrace();

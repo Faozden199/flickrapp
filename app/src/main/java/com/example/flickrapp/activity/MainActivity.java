@@ -26,14 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         //First button who print all images URL on the first page
         final Button button = findViewById(R.id.getButton);
-        button.setOnClickListener(new GetImageOnClickListener(MainActivity.this){
-            @Override
-            public void onClick(View v) {
-                Log.i("JFL", "Je suis dans le OnClick de getImage");
-                AsyncTask<String, Void, JSONObject> task = new AsyncFlickrJSONData(MainActivity.this);
-                task.execute("https://www.flickr.com/services/feeds/photos_public.gne?tags=trees&format=json");
-            }
-        });
+        button.setOnClickListener(new GetImageOnClickListener(MainActivity.this));
 
         //Second button who launch our ListActivity
         final Button button2 = findViewById(R.id.getListActivity);

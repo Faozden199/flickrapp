@@ -3,6 +3,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.flickrapp.R;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -12,6 +17,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
+
+    private final AppCompatActivity myActivity;
+    public AsyncBitmapDownloader(AppCompatActivity mainActivity) {
+        myActivity = mainActivity;
+    }
 
     @Override
     protected Bitmap doInBackground(String... strings) {
@@ -40,5 +50,9 @@ public class AsyncBitmapDownloader extends AsyncTask<String, Void, Bitmap> {
     protected void onPostExecute(Bitmap bitmap) {
         Log.i("JFL", "Image received !");
         Log.i("JFL", bitmap.toString());
+
+        //When our image is download we update our ImageView
+        ImageView image = (ImageView) myActivity.findViewById(R.id.imageHolder);
+        image.setImageBitmap(bitmap);
     }
 }

@@ -12,23 +12,26 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="156dp"
         android:layout_marginLeft="156dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="13dp"
         android:layout_marginEnd="162dp"
         android:layout_marginRight="162dp"
-        android:text="GET IMAGE URL"
+        android:layout_marginBottom="9dp"
+        android:text="GET IMAGE AND ALL URL"
+        app:layout_constraintBottom_toTopOf="@+id/imageHolder"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/getListActivity" />
 
     <Button
         android:id="@+id/getListActivity"
         android:layout_width="247dp"
         android:layout_height="49dp"
-        android:layout_marginTop="184dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="13dp"
         android:text="Start the new activity"
+        app:layout_constraintBottom_toTopOf="@+id/getButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,27 +39,40 @@
         android:id="@+id/list"
         android:layout_width="414dp"
         android:layout_height="219dp"
-        android:layout_marginTop="396dp"
-        android:layout_marginBottom="119dp"
+        android:layout_marginBottom="112dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="135dp"
-        android:layout_marginLeft="135dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="135dp"
-        android:layout_marginRight="135dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginRight="130dp"
+        android:layout_marginBottom="25dp"
         android:text="List of the image URL :"
         app:layout_constraintBottom_toTopOf="@+id/list"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageHolder"
+        android:layout_width="151dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginRight="130dp"
+        android:layout_marginBottom="71dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/getButton" />
+        app:layout_constraintTop_toBottomOf="@+id/getButton"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
